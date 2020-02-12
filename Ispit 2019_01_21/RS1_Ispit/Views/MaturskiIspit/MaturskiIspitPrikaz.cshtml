@@ -1,0 +1,40 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "MaturskiIspitPrikaz";
+}
+@model MaturskiIspitPrikazVM
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Skola</th>
+            <th>Predmet</th>
+            <th>Nisu pristupili ***</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.MaturskiPodaci)
+        {
+        <tr>
+            <td>@x.datumIspita</td>
+            <td>@x.skolaNaziv</td>
+            <td>@x.Predmet</td>
+            <td>
+                @foreach (var y in x.uceniciNisuPristupili)
+                {
+
+                    <span>@y</span>
+
+                }
+            </td>
+                <td>
+                    <a href="/MaturskiIspit/UrediMaturski?maturskiID=@x.matuskiIspitID">Uredi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/MaturskiIspit/DodavanjeMaturskog?nastavnikID=@Model.NastavnikID">Dodaj</a>
+
+

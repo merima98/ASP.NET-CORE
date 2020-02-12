@@ -1,0 +1,35 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "UrediMaturski";
+}
+@model MaturskiIspit_UrediVM
+<form class="form-group" action="/MaturskiIspit/SnimanjeMaturskog">
+    <input value="@Model.MaturskiID" name="MaturskiID" hidden readonly />
+    <div class="form-control">
+        <label>Datum: </label>
+        <input value="@Model.DatumMaturskog" readonly />
+    </div>
+    <div class="form-control">
+        <label>Predmet: </label>
+        <input value="@Model.PredmetNaziv" readonly />
+    </div>
+    <div class="form-control">
+        <label>Napomena: </label>
+        <input value="@Model.Napomena" name="Napomena" />
+    </div>
+    <div class="form-control">
+        <input value="Snimi" type="submit" />
+    </div>
+</form>
+<div id="nekiID"></div>
+<script>
+    $(document).ready(function (event) {
+
+        $.get("/MaturskiIspit/DetaljiMaturskogIspita?maturskiID=@Model.MaturskiID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+</script>
+

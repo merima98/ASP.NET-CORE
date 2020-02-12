@@ -1,0 +1,62 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "UredivanjePopravnogIspita";
+}
+@model DetaljiPopravnogIspitaVM
+<form class="form-group" >
+    <input asp-for="popravniIspitID" hidden/>
+    <div class="form-control">
+        <label>Clan komisije: </label>
+        <input asp-for="clanKomicije1"  readonly/>
+    </div>
+
+    <div class="form-control">
+        <label>Clan komisije: </label>
+        <input asp-for="clanKomisije2" readonly />
+    </div>
+
+    <div class="form-control">
+        <label>Clan komisije: </label>
+        <input asp-for="clanKomisije3" readonly />
+    </div>
+
+
+    <div class="form-control">
+        <label>Datum ispita:  </label>
+        <input asp-for="datumIspita" readonly/>
+    </div>
+    <div class="form-control">
+        <label>Skola:  </label>
+        <input asp-for="skolaID" hidden />
+        <input asp-for="skolaNaziv" readonly />
+    </div>
+
+    <div class="form-control">
+        <label>Skolska godina:  </label>
+        <input asp-for="skolskaGodina" readonly />
+    </div>
+    <div class="form-control">
+        <label>Predmet:  </label>
+        <input asp-for="predmetNaziv" readonly />
+    </div>
+</form>
+<div id="nekiID"></div>
+<input id="dodavanjeUcenikatInput-@Model.popravniIspitID" value="Dodaj ucenika" type="submit"/>
+<br /><br />
+<a href="/PopravniIspit/DodavanjePopravnogIspita?skolaID=@Model.skolaID&skolskaGodinaID=@Model.skolskaGOdinaID&predmetId=@Model.predmetID">Dodaj popravni ispit</a>
+<script>
+    $(document).ready(function (event) {
+        $.get("/PopravniIspit/PrikazDetaljaPopravnog?popravniId=@Model.popravniIspitID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+    $("#dodavanjeUcenikatInput-@Model.popravniIspitID").click(function (event) {
+        $.get("/PopravniIspit/DodavanjeUcenika?popraavniID=@Model.popravniIspitID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    })
+</script>

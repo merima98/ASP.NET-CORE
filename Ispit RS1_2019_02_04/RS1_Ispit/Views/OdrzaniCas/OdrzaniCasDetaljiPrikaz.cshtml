@@ -1,0 +1,123 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "OdrzaniCasDetaljiPrikaz";
+}
+@model OdrzaniCasDetalji_VM_Prikaz
+<style>
+    .DA{
+        background-color:green;
+        color:white;
+    }
+    .NE{
+        background-color:red;
+        color:white;
+    }
+</style>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ucenik</th>
+            <th>Ocjena na casu</th>
+            <th>Prosjek ocjena</th>
+            <th>Prisutan</th>
+            <th>Opravdano odsutan</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.podaciDetaji)
+        {
+            <tr>
+                <td>@x.ucenikImePrezime</td>
+                <td>
+                    @if (x.prisutan)
+                    {
+                    @*@x.ocjena*@
+                        <input data-zaprimi="@x.odrzaniCasDetaljiID" class="ajaxRezultat" value=" @x.ocjena"/>
+                    }
+                    else
+                    {
+                        @:x
+                    }
+                </td>
+                <td>@x.prosjekOcjena</td>
+                <td>
+                    <input id="mijenjanjePrisutnosti-@x.odrzaniCasDetaljiID" class="@x.rezultatPrisutan" value="@x.rezultatPrisutan" type="submit" />
+                <script>
+                    $("#mijenjanjePrisutnosti-@x.odrzaniCasDetaljiID").click(function (event) {
+                        $.get("/OdrzaniCas/PromijeniPrisutnost?detaljiID=@x.odrzaniCasDetaljiID",
+                            function (result, status) {
+                                $("#nekiID").html(result);
+                            }
+                        );
+                    });
+                </script>
+                </td>
+                
+                <td>
+                    @if (x.prisutan==false)
+                    {
+                        @if (x.opravdanoOdsutan)
+                        {
+                            @:DA
+                        }
+                        else
+                        {
+                            @:NE
+                        }
+                    }
+                    else
+                    {
+                        //ostavi prazno
+                    }
+                </td>
+                <td>
+                    @if (x.prisutan)
+                    {
+                        <input id="mijenjanjeOcjene-@x.odrzaniCasDetaljiID" value="Uredi" type="submit">
+                    }
+
+                    else
+                    {
+                        <input id="mijenjanjeOdsutnosti-@x.odrzaniCasDetaljiID" value="Uredi" type="submit">
+                    }
+                    <script>
+                        $("#mijenjanjeOcjene-@x.odrzaniCasDetaljiID").click(function (event) {
+                            $.get("/OdrzaniCas/MijenjanjeOcjene?detaljiID=@x.odrzaniCasDetaljiID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                             $("#mijenjanjeOdsutnosti-@x.odrzaniCasDetaljiID").click(function (event) {
+                            $.get("/OdrzaniCas/MijenjanjeOdsutnosti?detaljiID=@x.odrzaniCasDetaljiID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                    </script>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function (event) {
+        $(".ajaxRezultat").change(function () {
+            var id = $(this).attr("data-zaprimi");
+            var vrijednost = $(this).val();
+
+            var urlPoziv = "/OdrzaniCas/SnimanjeOcjene?detaljiID=" + id + "&ocjena=" + vrijednost;
+
+            $.ajax({
+                url: urlPoziv,
+                type: "POST",
+                success: function (result) {
+                    $("#nekiID").html(result);
+                }
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,32 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazPopravnog";
+}
+@model PopravniIspit_VM_PRIKAZ
+<h5>Popravni ispit za odjeljenje @Model.odjeljenjeNAziv - @Model.skolaNaziv - @Model.skGOdinaNAziv</h5>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum popravnog ispita</th>
+            <th>Predmet</th>
+            <th>Broj ucenika na  popravnom ispitu *** </th>
+            <th>Broj ucenika koji su polozili popravni ispit (bodovi veci od 50)*** </th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.detaljiPopravniPrikaz)
+        {
+            <tr>
+                <td>@x.datumPopravnog</td>
+                <td>@x.predmet</td>
+                <td>@x.brojUcenikaNaPopravnomIspitu</td>
+                <td>@x.brojPolozili</td>
+                <td>
+                    <a href="/PopravniIspit/UredivanjePopravnig?popravniID=@x.popravniID">Uredi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/PopravniIspit/DodavanjePopravnig?sskolaID=@Model.skolaID&odjljenjeId=@Model.odjeljenjeID&skGOdinaID=@Model.skGodinaID">Dodaj</a>

@@ -1,0 +1,101 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazDetaljaPopravnog";
+}
+@model PopravniIspitDetaljiVM_Prikaz
+<style>
+    .DA{
+        color:white;
+        background-color:green;
+    }
+     .NE{
+        color:white;
+        background-color:red;
+    }
+</style>
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Ucenik</th>
+                <th>Odjeljenje</th>
+                <th>Broj u dnevniku</th>
+                <th>Pristupio ispitu</th>
+                <th>Rezultati ispita (max 100)</th>
+                <th>Akcija</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model.podaciDetaljiPopravni)
+            {
+                <tr>
+                    <td>@x.ucenikIme</td>
+                    <td>@x.odjeljenjeNaziv</td>
+                    <td>@x.brojUDnevniku</td>
+                    <td>
+                        @if (x.ImaPravoPristupa)
+                        {
+                            <input id="mijenjanjePrisutnosti-@x.detaljiID" value="@x.rezultatPristupa" type="submit" class="@x.rezultatPristupa" />
+
+                        }
+                        else
+                        {
+                            <span style="color:red;">Nema pravo pristupa</span>
+                        }
+                        <script>
+                            $("#mijenjanjePrisutnosti-@x.detaljiID").click(function (event) {
+                                $.get("/PopravniIspit/MijenjanjePrisutnosti?detaljiID=@x.detaljiID",
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+                        </script>
+                    </td>
+                    <td>
+                        @if (x.ImaPravoPristupa)
+                        {
+                            @if (x.pristupio)
+                            {
+                                @x.rezultatiBodovi
+                            }
+                            else
+                            {
+                                @:x
+                            }
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                    </td>
+                    <td>
+                        @if (x.ImaPravoPristupa)
+                        {
+                            @if (x.pristupio)
+                            {
+                                <input value="Uredi" type="submit" id="btnUredjivanjeBodovaUcenika-@x.detaljiID"/>
+                            }
+                            else
+                            {
+                                //ostavi prazno
+                            }
+                        }
+                        else
+                        {
+                            <span></span>
+                        }
+                        <script>
+                            $("#btnUredjivanjeBodovaUcenika-@x.detaljiID").click(function (event) {
+                                $.get("/PopravniIspit/UredjivanjeUcenikaBodova?detaljiID=@x.detaljiID",
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+                        </script>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

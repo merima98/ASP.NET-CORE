@@ -1,0 +1,33 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "DetaljiODrzanogCasa";
+}
+@model  DetaljiOdrzanogCasa_VM
+<form class="form-group" asp-action="DodavanjeCassa">
+    <div class="form-control">
+        <label>Datum</label>
+        <input asp-for="odrzanicasID" hidden />
+        <input asp-for="datumCasa" readonly />
+    </div>
+    <div class="form-control">
+        <label>Skola/Odjeljenje/Predmet</label>
+        <input asp-for="skolaOdjeljenjePredmet" style="width:250px" readonly />
+    </div>
+    <div class="form-control">
+        <label>Sadrzaj casa:</label>
+        <input asp-for="sadrzajCasa"  readonly/>
+    </div>
+</form>
+<div id="nekiID"></div>
+<script>
+    $(document).ready(function (event) {
+        $.get("/OdrzaniCas/OdrzaniCasDetaljiPrikaz?odrzaniCasID=@Model.odrzanicasID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+</script>
+
+
+

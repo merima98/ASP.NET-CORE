@@ -1,0 +1,84 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazRezultata";
+}
+@model RezultatPretrageVM_PRikaz
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pretraga</th>
+                <th>Izmjerena vrijednost</th>
+                <th>JMJ</th>
+                <th>Akcija</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model.podaciRezultatiPrikaz)
+            {
+                <tr>
+
+                    <td>@x.rezultatID </td>
+                    <td>@x.labPretragaNaziv </td>
+                    <td>
+                        @if (x.vrstaVrijednosti==0) //ako je numericka vrijednost
+                        {
+                            @if (x.izmjerenaNumerickaVrijednost==null)
+                            {
+                                @:(nije evidentirano)
+                            }
+                            else
+                            {
+                                @x.izmjerenaNumerickaVrijednost
+                            }
+                        }
+                        else //ako je modalitet
+                        {
+                            @x.akoJeModalitetNaziv
+                        }
+                    </td>
+                    <td>
+                        @if (x.vrstaVrijednosti==0)
+                        {
+                            @x.mjernaJednicica
+                        }
+                        else
+                        {
+                            //prazno
+                        }
+
+                    </td>
+                    <td>
+                        @if (x.vrstaVrijednosti == 0)
+                        {
+                            <input value="Uredi" type="submit" id="numericko-@x.rezultatID" />
+                        }
+                        else
+                        {
+                            <input value="Uredi" type="submit" id="modalitet-@x.rezultatID" />
+
+                        }
+                        <script>
+                            $("#numericko-@x.rezultatID").click(function (event) {
+                                $.get("/Uputnica/UredjivanjeNumericko?labID=@x.rezultatID",
+
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+                              $("#modalitet-@x.rezultatID").click(function (event) {
+                                $.get("/Uputnica/UredjivanjeModalitet?labID=@x.rezultatID",
+
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+
+                        </script>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

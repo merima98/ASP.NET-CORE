@@ -1,0 +1,118 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazDetaljaPopravnog";
+}
+@model PopravvvniIspitDeetalji_VM_Prikaz
+<style>
+    .DA{
+        color: white;background-color : green;
+    }
+    .NE{
+        color: white;background-color : red;
+    }
+</style>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ucenik</th>
+            <th>Odjeljenje</th>
+            <th>Broj u dnevniku</th>
+            <th>Pristupio</th>
+            <th>Rezultati maturskog (max 100)</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.detaljiPrikaz)
+        {
+            <tr>
+                <td>@x.ucenikIme</td>
+                <td>@x.odjeljenjeIme</td>
+                <td>@x.brojUDnevniku</td>
+
+                <td>
+                    @if (x.imaPravoPristupa)
+                    {
+                        <input id="mijenjanjePristupa-@x.detaljID"  class="@x.rezultatPristupa" value="@x.rezultatPristupa" type="submit"/>
+                    }
+                    else
+                    {
+                        <span style="color:red;">Nema pravo pristupa</span>
+                    }
+                    <script>
+                        $("#mijenjanjePristupa-@x.detaljID").click(function (event) {
+                            $.get("/PopravniIspit/MijenjanjePristupa?detaljiID=@x.detaljID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                    </script>
+                </td>
+
+                <td>
+                    @if (x.imaPravoPristupa)
+                    {
+                        @if (x.pristupio)
+                        {
+                            <input value="@x.brojBodova" class="ajaxResult" data-zaprimi="@x.detaljID"/>
+                        }
+                        else
+                        {
+                            @:x
+                        }
+                    }
+                    else
+                    {
+                        <span>0</span>
+                    }
+                    </td>
+                <td>
+                    @if (x.imaPravoPristupa)
+                    {
+                        @if (x.pristupio)
+                        {
+                            <input value="Uredi" type="submit" id="btnUredjivanjeBodova-@x.detaljID" />
+                        }
+                        else
+                        {
+                            //prazno
+                        }
+                    }
+                    else
+                    {
+                        <span></span>
+                    }
+                    <script>
+                        $("#btnUredjivanjeBodova-@x.detaljID").click(function (event) {
+                            $.get("/PopravniIspit/MijenjanjeBodova?detaljiID=@x.detaljID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                    </script>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function (event) {
+
+        $(".ajaxResult").change(function () {
+
+            var id = $(this).attr("data-zaprimi");
+            var bodovi = $(this).val();
+            var potrebanUrl = "/PopravniIspit/SnimanjeBodova?detaljiID=" + id + "&bodovi=" + bodovi;
+
+            $.ajax({
+                type: "POST",
+                url: potrebanUrl,
+                success: function (result) {
+                    $("#nekiID").html(result);
+                }
+            });
+        });
+    });
+</script>

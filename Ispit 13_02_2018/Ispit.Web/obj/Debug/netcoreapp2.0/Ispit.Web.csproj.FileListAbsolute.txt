@@ -1,0 +1,17 @@
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\appsettings.Development.json
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\appsettings.json
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\bundleconfig.json
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\Properties\launchSettings.json
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\Ispit.Web.deps.json
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\Ispit.Web.runtimeconfig.json
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\Ispit.Web.runtimeconfig.dev.json
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\Ispit.Web.dll
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\Ispit.Web.pdb
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\Ispit.Data.dll
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\bin\Debug\netcoreapp2.0\Ispit.Data.pdb
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\obj\Debug\netcoreapp2.0\Ispit.Web.csprojAssemblyReference.cache
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\obj\Debug\netcoreapp2.0\Ispit.Web.AssemblyInfoInputs.cache
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\obj\Debug\netcoreapp2.0\Ispit.Web.AssemblyInfo.cs
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\obj\Debug\netcoreapp2.0\Ispit.Web.csproj.CopyComplete
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\obj\Debug\netcoreapp2.0\Ispit.Web.dll
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Web\obj\Debug\netcoreapp2.0\Ispit.Web.pdb

@@ -1,0 +1,18 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "Index";
+}
+@model PrikazSkolaRazred_VM
+    <form class="form-group" asp-action="Odaberi">
+        <div class="form-control">
+            <label>Skola domacin: </label>
+            <select asp-for="skolaID" asp-items="Model.skola"></select>
+        </div>
+        <div class="form-control">
+            <label>Razred:  </label>
+            <select asp-for="razredID" asp-items="Model.razred"></select>
+        </div>
+        <div class="form-control">
+            <input value="Odaberi" type="submit"/>
+        </div>
+    </form>

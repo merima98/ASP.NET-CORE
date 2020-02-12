@@ -1,0 +1,66 @@
+﻿@using Ispit.Web.ViewModels
+@{
+    ViewData["Title"] = "Index";
+}
+@model OznaceniNeoznaceniDogadjajiVM_PRIKAZ
+
+<div class="alert alert-warning" role="alert">
+    <strong>Događaj "ISPIT RS1" - 13.02.2018.</strong> <br />
+    Ovo je podsjetnik za obavezu "Pregledati pdf materijale". Označi kao <a href="/OznaceniDogadaji/OznaciProcitano" class="">pročitanu.</a>
+</div>
+
+<h2>Neoznačeni događaji</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Nastavnik</th>
+            <th>Opis</th>
+            <th>Broj obaveza</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var x in Model.neoznaceniDogadjaji)
+       {
+           <tr>
+               <td>@x.datumDogadjaja</td>
+               <td>@x.NastavnikImePrezime</td>
+               <td>@x.opisDogadjaja</td>
+               <td>@x.BrojObaveza</td>
+               <td>
+                   <a href="/OznaceniDogadaji/DodavanjeUOznaceneDogadjaje?dogadjajID=@x.DogadjajID">Dodaj</a>
+               </td>
+           </tr>
+       }
+    </tbody>
+</table>
+<br />
+<hr />
+<br />
+
+<h2>Označeni događaji</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Nastavnik</th>
+            <th>Opis</th>
+            <th>Relizovano obaveza RO</th>
+            <th>Akcija</th>
+</thead>
+    <tbody>
+       @foreach (var x in Model.oznaceniDogadjaji)
+       {
+           <tr>
+               <td>@x.datumDogadjaja</td>
+               <td>@x.NastavnikImePrezime</td>
+               <td>@x.opisDogadjaja</td>
+               <td>@x.IzvrsenoProcentualno</td>
+               <td>
+                   <a href="/OznaceniDogadaji/DetaljiDogadjaja?dogadjajID=@x.DogadjajID">Detalji</a>
+               </td>
+           </tr>
+       }
+    </tbody>
+</table>

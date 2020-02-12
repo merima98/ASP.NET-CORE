@@ -1,0 +1,42 @@
+﻿@using Ispit_2017_09_11_DotnetCore.ViewModels
+@{
+    ViewData["Title"] = "DodavanjeUcenikaUOdjeljenje";
+}
+@model DodavanjeUcenikaVM
+<form id="formaDodavanjUcenika" class="form-group" action="/Odjeljenja/SnimanjeUcenika">
+    <input value="@Model.odjeljenjeID" name="odjeljenjeID" hidden />
+    <input value="@Model.detaljiID" name="detaljiID" hidden />
+<div class="form-control">
+    <label>Dodavanje ucenika</label>
+</div>
+
+    <div class="form-control">
+        <label>Ucenik: </label>
+        <select name="ucenikID">
+            <option>(odaberite ucenika)</option>
+            @foreach (SelectListItem item in Model.Ucenik)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="form-control">
+        <label>Broj u dnevniku: </label>
+        <input value="@Model.BrojUDnevniku" name="BrojUDnevniku" />
+    </div>
+</form>
+        <input id="snimanjeUcenika" value="Snimi" type="submit" />
+<script>
+    $("#snimanjeUcenika").click(function (event) {
+        var fooorma = $("#formaDodavanjUcenika");
+
+        $.ajax({
+            url: '/Odjeljenja/SnimanjeUcenika', 
+            data: fooorma.serialize(), 
+            type: "POST", 
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>

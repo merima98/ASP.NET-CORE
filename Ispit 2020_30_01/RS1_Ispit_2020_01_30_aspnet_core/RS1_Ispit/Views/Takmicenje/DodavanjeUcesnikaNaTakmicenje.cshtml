@@ -1,0 +1,30 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "DodavanjeUcesnikaNaTakmicenje";
+}
+@model DodavanjeUceniskaVM
+<form id="dodavanjeUcesnikID_Forma" class="form-group" asp-action="DodavanjeUcesnikaNaTakmicenje">
+    <input asp-for="takmicenjeID" hidden />
+    <div class="form-control">
+        <label>Ucenik : </label>
+        <select asp-for="ucenikID" asp-items="Model.ucenik"></select>
+    </div>
+    <div class="form-control">
+        <label>Bodovi:  </label>
+        <input asp-for="bodovi" />
+    </div>
+</form>
+        <input id="dodavanjeUcesnikID_BTN" value="Snimi" type="submit" />
+<script>
+    $("#dodavanjeUcesnikID_BTN").click(function (event) {
+        var forma = $("#dodavanjeUcesnikID_Forma");
+        $.ajax({
+            data: forma.serialize(),
+            type: "POST",
+            url: '/Takmicenje/DodavanjeUcesnikaNaTakmicenje',
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>

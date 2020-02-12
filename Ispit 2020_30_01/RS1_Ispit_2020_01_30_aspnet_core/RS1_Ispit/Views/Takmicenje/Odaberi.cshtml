@@ -1,0 +1,38 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "Odaberi";
+}
+@model PrikazTakmicenjaVM
+<table class="table table-striped">
+    <div class="row" style="background-color:aliceblue; border:1px; color:darkblue;">
+        <label>Skola domacin: @Model.skolaNaziv</label>
+        <br />
+        <label>Razred: @Model.razred</label>
+    </div>
+    <thead>
+        <tr>
+            <th>TAkmicenjenj ID</th>
+            <th>Predmet</th>
+            <th>Razred</th>
+            <th>Datum</th>
+            <th>Broj ucesnika koji nisu prstupili</th>
+            <th>Najbolji ucesnik (Skola | Odjljenje | Ime i prezime)</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    @foreach (var x in Model.podaciTakmicenjePrikaz)
+    {
+        <tr>
+            <td>@x.takmicenjeID</td>
+            <td>@x.predmetNaziv</td>
+            <td>@x.razred</td>
+            <td>@x.datum</td>
+            <td>@x.brojUcenisnikaKOjiNisuPristupili</td>
+            <td>@x.najboljaSkola | @x.najboljeOdjeljenje | @x.najboljiUcenikIme</td>
+            <td>
+                <a href="/Takmicenje/PrikazDetaljaTakmicenja?tID=@x.takmicenjeID" >Rezultati</a>
+            </td>
+        </tr>
+    }
+</table>
+<a href="/Takmicenje/DodavanjeTakmicenje?skolaID=@Model.skolaID">Dodaj</a>

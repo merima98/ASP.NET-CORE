@@ -1,0 +1,53 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazIspitnihTermina";
+}
+@model PrikazIspitaVM
+<div class="form-group">
+    <label>Predmet</label>
+    <input asp-for="predmetNaziv" readonly />
+</div>
+<div class="form-group">
+    <label>Nastavnik: </label>
+    <input asp-for="nastavnikIme" readonly />
+</div>
+<div class="form-group">
+    <label>Akademska godina: </label>
+    <input asp-for="akademskaNaziv" readonly />
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum ispita</th>
+            <th>Broj studenata koji nisu polozili ispit</th>
+            <th>Broj prijavljenih studenata</th>
+            <th>Evidentirani rezultati (zakljucano)</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <thead>
+        @foreach (var x in Model.podaciIspit)
+        {
+            <tr>
+                <td>@x.datumIspita</td>
+                <td>@x.brojStudenataKojiNisuPoloziliPredmet</td>
+                <td>@x.brojPrijavljenihStudenata</td>
+                <td>
+                    @if (x.evidentiraniRezultati)
+                    {
+                        @:da
+                    }
+                    else
+                    {
+                        @:ne
+                    }
+                </td>
+                <td>
+                    <a href="/Ispit/DetaljiPopravnogspita?popravniID=@x.ispitID">Detalji ***</a>  |
+                    <a href="/Ispit/Zakljucaj?ispitID=@x.ispitID">Zakljucaj ***</a>
+                </td>
+            </tr>
+        }
+    </thead>
+</table>
+<a href="/Ispit/DodavanjeIspita?nastavnikID=@Model.nastavnikID&predmetID=@Model.predmetID&akGodinaID=@Model.akademskaID">Dodaj ***</a>

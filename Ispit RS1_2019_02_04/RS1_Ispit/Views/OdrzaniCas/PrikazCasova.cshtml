@@ -1,0 +1,40 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazCasova";
+}
+@model OdrzaniCasoviPrikaz_VM
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum odrzanog casa</th>
+            <th>Skola</th>
+            <th>Skolska godina/Odjeljenje</th>
+            <th>Predmet</th>
+            <th>Odsutni ucenici***</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.podaciCasovi)
+        {
+            <tr>
+                <td>@x.datumCasa</td>
+                <td>@x.skola</td>
+                <td>@x.skolskaGOdina/@x.odjeljenje</td>
+                <td>@x.predmet</td>
+                <td>
+                    @foreach (var y in x.odsutinUcenici)
+                    {
+                        <span>@y, </span>
+                    }
+                </td>
+                <td>
+                    <a href="/OdrzaniCas/DetaljiODrzanogCasa?casID=@x.odrzaniCasID">Detalji***</a> |
+                    <a href="/OdrzaniCas/BrisanjeCasa?casID=@x.odrzaniCasID">Obrisi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/OdrzaniCas/DodavanjeCassa?nastavnikID=@Model.nastavnikID">Dodaj</a>
+

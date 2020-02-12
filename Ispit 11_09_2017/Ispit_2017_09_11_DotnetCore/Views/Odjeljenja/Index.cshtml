@@ -1,0 +1,48 @@
+﻿@using Ispit_2017_09_11_DotnetCore.ViewModels
+@{
+    ViewData["Title"] = "Index";
+}
+@model Odjeljenje_Prikaz_VM
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Skolska godina</th>
+            <th>Razred (1-4)</th>
+            <th>Oznaka</th>
+            <th>Razrednik</th>
+            <th>Prebacen u vise odjeljenje</th>
+            <th>Prosjek ocjena</th>
+            <th>Najbolji ucenik</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.OdjeljenjePodaci)
+        {
+            <tr>
+                <td>@x.skolskaGodina</td>
+                <td>@x.Razred</td>
+                <td>@x.oznakaOdjeljenja</td>
+                <td>@x.NastavnikImePrezime</td>
+                <td>
+                    @if (x.isPrebacenUViseOdjeljenje)
+                    {
+                        @:DA
+                    }
+                    else
+                    {
+                        @:NE
+                    }
+                </td>
+                <td>@x.ProsjekOcjena</td>
+                <td>@x.najboljiUcenik</td>
+                <td>
+                    <a href="/Odjeljenja/DetaljiOdjeljenja?odjeljenjeID=@x.OdjeljenjeID">Detalji</a> |
+                    <a href="/Odjeljenja/BrisanjeOdjeljenja?odjeljenjeID=@x.OdjeljenjeID">Obrisi</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Odjeljenja/DodavanjeOdjeljenja">Dodaj</a>
+

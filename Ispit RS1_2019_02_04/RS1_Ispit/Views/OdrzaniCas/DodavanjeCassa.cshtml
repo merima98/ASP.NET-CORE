@@ -1,0 +1,26 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "DodavanjeCassa";
+}
+@model OdrzaniCasVM_Dodaj
+    <form class="form-group" asp-action="DodavanjeCassa">
+        <div class="form-control">
+            <label>Nastavnik</label>
+            <input asp-for="nastavnikID" hidden />
+            <input asp-for="NastavnikImePrezime" readonly />
+        </div>
+        <div class="form-control">
+            <input asp-for="datumCasa" />
+        </div>
+        <div class="form-control">
+            <label>Skola/Odjeljenje/Predmet</label>
+            <select asp-for="odjeljenjeSkolaPredmetID" asp-items="Model.odjeljenjeSkolaPredmet"></select>
+        </div>
+        <div class="form-control">
+            <label>Sadrzaj casa:</label>
+            <input asp-for="sadrzajCasa" />
+        </div>
+        <div class="form-control">
+            <input value="Snimi" type="submit"/>
+        </div>
+    </form>

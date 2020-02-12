@@ -1,0 +1,57 @@
+﻿@using Ispit.Web.ViewModels
+@{
+    ViewData["Title"] = "StanjeObavezePrikaz";
+}
+@model StanjeObavezePrikazVM
+<h2>Obaveze događaja</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Procenat realizacije obaveze</th>
+            <th>Personalna vrijednost za: Šalji notifikaciju x dana unaprijed</th>
+            <th>Personalna vrijednost za: Ponavljaj notifikaciju svaki dan do početka događaja</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.podaciStanjeObavezePrikaz)
+        {
+            <tr>
+                <td>@x.naziivStanjaObaveze</td>
+                <td>@x.izvrsenoProcentualno %</td>
+                <td>@x.personalnaVrijednostSaljiNotifikacijuDanaPrije</td>
+                <td>
+                    @if (x.personalnaVrijednostRekurzijaBOOL)
+                    {
+                        @:DA
+                    }
+                    else
+                    {
+                        @:NE
+                    }
+                </td>
+                <td>
+                    @if (x.isZavrseno == false)
+                    {
+                        <input id="evidentiranje-@x.stanjeObavezeID" href="/OznaceniDogadaji/EvidentiranjeStanjaObaveze?stanjeObavezeID=@x.stanjeObavezeID" value="Uredi" type="submit" />
+                        <script>
+                        $("#evidentiranje-@x.stanjeObavezeID").click(function (event) {
+                            $.get("/OznaceniDogadaji/EvidentiranjeStanjaObaveze?stanjeObavezeID=@x.stanjeObavezeID",
+
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                        </script>
+                    }
+                    else
+                    {
+                        <span class="btn btn-default">Uredi</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

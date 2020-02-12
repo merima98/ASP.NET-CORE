@@ -1,0 +1,39 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "Index";
+}
+@model PrikazPredmetNastavnikAkGodina_VM
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Naziv predmeta</th>
+            <th>Akademska godina</th>
+            <th>Ime i prezime nastavnika</th>
+            <th>Broj odrzanih casova</th>
+            <th>Broj studenata na predmetu</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.podaciDetalji.GroupBy(y => y.nazivPredmet))
+        {
+            <tr>
+                <td>@x.Key</td>
+            </tr>
+            @foreach (var y in x)
+            {
+                <tr>
+                    <td></td>
+                    <td>@y.akademskaGodina</td>
+                    <td>@y.nastavnikIme</td>
+                    <td>@y.brojCasova</td>
+                    <td>@y.brojUcenikaNaPredmetu</td>
+                    <td>
+                        <a href="/Ispit/PrikazIspitnihTermina?predmetID=@y.predmetID&nastvnikID=@y.nastavnikID&akGodinaID=@y.akademskaGOdinaID">Odaberi</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

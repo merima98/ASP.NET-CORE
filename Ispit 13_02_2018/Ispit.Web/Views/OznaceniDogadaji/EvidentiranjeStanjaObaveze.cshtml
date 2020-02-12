@@ -1,0 +1,33 @@
+﻿@using Ispit.Web.ViewModels
+@{
+    ViewData["Title"] = "EvidentiranjeStanjaObaveze";
+}
+@model EvidentiranjeStanjaObavezeVM
+<form id="formaSnimanje" class="form-group" action="/OznaceniDogadaji/SnimanjeProcenta">
+    <input value="@Model.stanjeObavezeID" name="stanjeObavezeID" hidden />
+
+    <div class="form-control">
+        <label>Obaveza: </label>
+        <input value="@Model.nazivObaveze" readonly />
+    </div>
+    <div class="form-control">
+        <label>Izvrseno procentulano </label>
+        <input value="@Model.izvrsenoProcentualno" name="izvrsenoProcentualno"  /> %
+    </div>
+  
+</form>
+<input id="buttonSnimanje" value="Snimi" type="submit"/>
+<script>
+    $("#buttonSnimanje").click(function (event) {
+        var forma = $("#formaSnimanje");
+
+        $.ajax({
+            data: forma.serialize(),
+            type: "POST",
+            url: '/OznaceniDogadaji/SnimanjeProcenta',
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>

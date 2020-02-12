@@ -1,0 +1,47 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "DodavanjePopravnogIspita";
+}
+@model PopravniIspitDodavanjeVM
+    <form class="form-group" asp-action="DodavanjePopravnogIspita">
+        <div class="form-control">
+            <label>Clan komisije: </label>
+            <select asp-for="clanKomisije1ID" asp-items="Model.clanKomisije1"></select>
+        </div>
+
+        <div class="form-control">
+            <label>Clan komisije: </label>
+            <select asp-for="clanKomisije2ID" asp-items="Model.clanKomisije2"></select>
+        </div>
+
+        <div class="form-control">
+            <label>Clan komisije: </label>
+            <select asp-for="clanKomisije3ID" asp-items="Model.clanKomisije3"></select>
+        </div>
+
+
+        <div class="form-control">
+            <label>Datum ispita:  </label>
+            <input asp-for="datumPopravnogIspita" />
+        </div>
+        <div class="form-control">
+            <label>Skola:  </label>
+            <input asp-for="skolaID" hidden />
+            <input asp-for="skolaNaziv" readonly />
+        </div>
+
+        <div class="form-control">
+            <label>Skolska godina:  </label>
+            <input asp-for="skolskaGodinaID" hidden />
+            <input asp-for="skolskaGodinaNaziv" readonly />
+        </div>
+        <div class="form-control">
+            <label>Predmet:  </label>
+            <input asp-for="predmetID" hidden />
+            <input asp-for="predmetNaziv" readonly />
+        </div>
+
+        <div class="form-control">
+            <input value="Snimi" type="submit" />
+        </div>
+    </form>

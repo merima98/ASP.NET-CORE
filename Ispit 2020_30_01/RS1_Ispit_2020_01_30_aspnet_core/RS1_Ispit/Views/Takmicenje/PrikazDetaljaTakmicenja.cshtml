@@ -1,0 +1,40 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazDetaljaTakmicenja";
+}
+@model DetaljiTakmicenjaVM
+    <form class="form-group" >
+        <input asp-for="takmicenjeID" hidden/>
+        <input asp-for="skolaID" hidden />
+        <div class="form-control">
+            <label>Skola : </label>
+            <input asp-for="skolaNaziv" readonly />
+        </div>
+        <div class="form-control">
+            <label>Predmet:  </label>
+            <input asp-for="predmet" readonly />
+        </div>
+        <div class="form-control">
+            <label>Razred:  </label>
+            <input asp-for="razred" readonly />
+        </div>
+        <div class="form-control">
+            <label>Datum:  </label>
+            <input asp-for="datum" readonly />
+        </div>
+        <div class="form-control">
+            <a href="/Takmicenje/Zakljucaj?takmicenjeID=@Model.takmicenjeID">Zakljucaj</a>
+        </div>
+
+    </form>
+<div id="nekiID"></div>
+<a href="/Takmicenje/DodavanjeTakmicenje?skolaID=@Model.skolaID">Dodaj takmicenje</a>
+<script>
+    $(document).ready(function (event) {
+        $.get("/Takmicenje/PrikazDetaljaTakmicenjeDetalji?takmicenjeID=@Model.takmicenjeID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+</script>

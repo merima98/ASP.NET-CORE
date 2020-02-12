@@ -1,0 +1,98 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazDetalja";
+}
+@model DetaljiCasaaa_PRikazDonjaTAbela
+<style>
+    .DA{
+        color:white;background-color:green;
+    }
+    .NE{
+        color:white;background-color:red;
+    }
+</style>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ucenik</th>
+                <th>Ocjena</th>
+                <th>Prisutan</th>
+                <th>Opravdano odsutan</th>
+                <th>Akcija</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model.podaciPrikaz)
+            {
+                <tr>
+                    <td>@x.ucenikIme</td>
+                    <td>
+                        @if (x.prisutan)
+                        {
+                            @x.ocjene
+                        }
+                        else
+                        {
+                            //prazno
+                        }
+                    </td>
+                    <td>
+                        <input id="mijenjenjePrisitnosti-@x.detaljiID" value="@x.rezultatPrisutan" class="@x.rezultatPrisutan" type="submit"/>
+                        <script>
+                            $("#mijenjenjePrisitnosti-@x.detaljiID").click(function (event) {
+                                $.get("/OdrzanaNastava/MIjenjenjaeOdsutnosit?detaljID=@x.detaljiID",
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+                        </script>
+                    </td>
+                    <td>
+                       @if (x.prisutan==false)
+                       {
+                           @if (x.opravdanoOdsutan)
+                           {
+                               @:DA
+                           }
+                           else
+                           {
+                               @:NE
+                           }
+                       }
+                       else
+                       {
+                           //prazno
+                       }
+                    </td>
+                    <td>
+                        @if (x.prisutan)
+                        {
+                            <input value="Uredi" type="submit" id="mijenjenjeOcjene-@x.detaljiID" />
+                        }
+                        else
+                        {
+                            <input value="Uredi" type="submit" id="mijenjenjeOdsutnosti-@x.detaljiID" />
+
+                        }
+                        <script>
+                            $("#mijenjenjeOcjene-@x.detaljiID").click(function (event) {
+                                $.get("/OdrzanaNastava/MijenjenjeOcjene?detalj=@x.detaljiID",
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+                               $("#mijenjenjeOdsutnosti-@x.detaljiID").click(function (event) {
+                                $.get("/OdrzanaNastava/MijenjenjeOpravdaneOdsutnosti?detalj=@x.detaljiID",
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+                        </script>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

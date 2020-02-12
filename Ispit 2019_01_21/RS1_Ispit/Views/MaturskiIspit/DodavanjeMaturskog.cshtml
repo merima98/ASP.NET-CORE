@@ -1,0 +1,32 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "DodavanjeMaturskog";
+}
+@model   MaturskiIspitAdd_VM
+    <form class="form-group" asp-action="DodavanjeMaturskog">
+            <input asp-for="NastavnikID" hidden readonly />
+        <div class="form-control">
+            <label>Skola: </label>
+            <select asp-for="SkolaID" asp-items="Model.Skola"></select>
+        </div>
+        <div class="form-control">
+            <label>Nastavnik: </label>
+            <input asp-for="NastavnikImePrezime" readonly />
+        </div>
+        <div class="form-control">
+            <label>Skolska godina: </label>
+            <input asp-for="SkolskaGodinaID" hidden readonly />
+            <input asp-for="SkolskaGodina" readonly />
+        </div>
+        <div class="form-control">
+            <label>Datum ispita: </label>
+            <input asp-for="DatumMaturskogIspita" />
+        </div>
+        <div class="form-control">
+            <label>Predmet: </label>
+            <select asp-for="PredmetID" asp-items="Model.Predmet"></select>
+        </div>
+        <div class="form-control">
+            <input value="Snimi" type="submit" />
+        </div>
+    </form>

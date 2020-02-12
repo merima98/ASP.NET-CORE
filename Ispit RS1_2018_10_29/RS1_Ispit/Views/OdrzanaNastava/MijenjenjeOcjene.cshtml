@@ -1,0 +1,31 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "MijenjenjeOcjene";
+}
+@model UrediOcejneVM
+<form id="formaSnimanjaOcjene" class="form-group" asp-action="SnimanjeOcjene">
+    <input asp-for="detaljID" hidden />
+    <div class="form-control">
+        <label>Ucenik: </label>
+        <input asp-for="ucenikIme" readonly />
+    </div>
+    <div class="form-control">
+        <label>Ocjena: </label>
+        <input asp-for="ocjena" />
+    </div>
+</form>
+<input id="bottonSnimanjaOcjene" value="Snimi" type="submit" />
+<script>
+    $("#bottonSnimanjaOcjene").click(function (event) {
+        var forma = $("#formaSnimanjaOcjene");
+
+        $.ajax({
+            url: '/OdrzanaNastava/SnimanjeOcjene',
+            data: forma.serialize(),
+            type: "POST",
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>

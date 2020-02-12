@@ -1,0 +1,58 @@
+﻿@using Ispit_2017_09_11_DotnetCore.ViewModels
+@{
+    ViewData["Title"] = "PrikazOdjeljenjeStavke";
+}
+@model OdjeljenjeStavkeDetaljit_PrikazVM
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Broj u dnevniku</th>
+            <th>Ucenik</th>
+            <th>Broj zakljucenih ocjena (kraj godine)</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.podaciDetalji)
+        {
+            <tr>
+                <td>@x.brojUDnevniku</td>
+                <td>@x.ucenikImePrezime</td>
+                <td>@x.brojZakljucenihOcjena</td>
+               
+                <td>
+                    <input type="submit" id="uredi-@x.detaljiID" href="/Odjeljenja/Uredi?odjeljenjeStavkeID=@x.detaljiID" value="Uredi" />|
+                    <input id="brisanje-@x.detaljiID" href="/Odjeljenja/BrisanjeDetalja?detaljiID=@x.detaljiID" value="Obrisi" type="submit" />
+                    <script>
+                        $("#brisanje-@x.detaljiID").click(function (event) {
+                            $.get("/Odjeljenja/BrisanjeDetalja?detaljiID=@x.detaljiID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                        $("#uredi-@x.detaljiID").click(function (event) {
+                            $.get("/Odjeljenja/Uredi?odjeljenjeStavkeID=@x.detaljiID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                    </script>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<input id="dodavanje-@Model.odjeljenjeID" href="/Odjeljenja/DodavanjeUcenikaUOdjeljenje?odjeljenjeID=@Model.odjeljenjeID" value="Dodaj" type="submit" />
+<script>
+    $("#dodavanje-@Model.odjeljenjeID").click(function (event) {
+        $.get("/Odjeljenja/DodavanjeUcenikaUOdjeljenje?odjeljenjeID=@Model.odjeljenjeID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+</script>
+
+

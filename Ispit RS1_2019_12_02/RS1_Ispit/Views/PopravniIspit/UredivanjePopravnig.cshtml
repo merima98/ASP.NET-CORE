@@ -1,0 +1,46 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "UredivanjePopravnig";
+}
+@model UredjivanjePopravnog_VM_Prikaz
+<form class="form-group" >
+    <input asp-for="popravniID" hidden/>
+    <div class="form-control">
+
+        <label>Predmet</label>
+        <input asp-for="PredmeNaziv"readonly />
+
+    </div>
+
+    <div class="form-control">
+        <label>Datum ispita: </label>
+        <input asp-for="datumPopravnog" readonly/>
+    </div>
+
+    <div class="form-control">
+        <label>Skola: </label>
+        <input asp-for="skolaID" hidden />
+        <input asp-for="skolaNaziv" readonly />
+    </div>
+    <div class="form-control">
+        <label>Skolska godina: </label>
+        <input asp-for="skGOdinaID" hidden />
+        <input asp-for="skGOdinaNaziv" readonly />
+    </div>
+    <div class="form-control">
+        <label>Odjeljenje: </label>
+        <input asp-for="odjeljenjeId" hidden />
+        <input asp-for="odjeljenjeNaziv" readonly />
+    </div>
+
+</form>
+<div id="nekiID"></div>
+<script>
+    $(document).ready(function (event) {
+        $.get("/PopravniIspit/PrikazDetaljaPopravnog?popravniID=@Model.popravniID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+</script>

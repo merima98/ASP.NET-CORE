@@ -1,0 +1,144 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "IspitniDetalji";
+}
+@model DetaljiISpitaPrikaz_VM_TabelaIspod
+<style>
+    .DA {
+        color: white;
+        background-color: green;
+    }
+
+    .NE {
+        color: white;
+        background-color: red;
+    }
+</style>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Pristupio ispitu</th>
+            <th>Ocjena</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <thead>
+        @foreach (var x in Model.detaljiIspitaPodaci)
+        {
+            <tr>
+                <td>@x.studentIme</td>
+                <td>
+                    @if (x.zakljucaano == false)
+                    {
+                        <input id="mijenjanjePrisustva-@x.detaljiID" value="@x.rezultatPristupa" class="@x.rezultatPristupa" type="submit" />
+
+                        <script>
+                        $("#mijenjanjePrisustva-@x.detaljiID").click(function (event) {
+                            $.get("/Ispit/MijenjanjePrisutnosti?detaljiID=@x.detaljiID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                        </script>
+                    }
+                    else  //ako se ne moze vise editovati
+                    {
+                        <span class="@x.rezultatPristupa">@x.rezultatPristupa</span>
+                    }
+                </td>
+                <td>
+                    @if (x.zakljucaano == false)
+                    {
+                        @if (x.pristupio)
+                        {
+                            <input value="@x.ocjena" data-zaprimi="@x.detaljiID" class="ajaxResult" />
+                        }
+                        else
+                        {
+                            //prazno
+                        }
+                    }
+                    else
+                    {
+                        @if (x.pristupio)
+                        {
+                         <span>@x.ocjena</span>
+                        }
+                        else
+                        {
+                            //prazno
+                        }
+                    }
+
+                </td>
+                <td>
+                    @if (x.zakljucaano == false)
+                    {
+                        @if (x.pristupio)
+                        {
+                            <input id="uredivanjeStudenta-@x.detaljiID" value="Uredi" type="submit" />
+
+                        }
+                        else
+                        {
+                            //prazno
+                        }
+                    }
+                    else
+                    {
+                        @if (x.pristupio)
+                        {
+                            <span>Uredi</span>
+
+                        }
+                        else
+                        {
+                            //prazno
+                        }
+                    }
+                    <script>
+                        $("#uredivanjeStudenta-@x.detaljiID").click(function (event) {
+                            $.get("/Ispit/UredjivanjeBodova?detaljiID=@x.detaljiID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                    </script>
+                </td>
+
+            </tr>
+        }
+    </thead>
+</table>
+<input id="dodavanjeStudenta-@Model.ispitID" value="Dodaj"  type="submit"/>
+<script>
+    $("#dodavanjeStudenta-@Model.ispitID").click(function (event) {
+        $.get("/Ispit/DodavanjeStudenta?ispitID=@Model.ispitID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+
+    $(document).ready(function (event) {
+
+        $(".ajaxResult").change(function () {
+
+            var id = $(this).attr("data-zaprimi");
+            var bodovi = $(this).val();
+            var potrebanURl = "/Ispit/SnimanjeOcjene?intDetalji=" + id + "&bodovi=" + bodovi;
+
+            $.ajax({
+                url: potrebanURl,
+                type: "POST",
+                success: function (result) {
+                    $("#nekiID").html(result);
+                }
+            })
+        });
+    });
+
+</script>

@@ -1,0 +1,97 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "DetaljiMaturskogIspita";
+}
+@model DetaljiMaturskiIspit_VM
+<style>
+    .DA{
+        color:white;
+        background-color: green;
+    }
+    .NE{
+        color:white;
+        background-color: red;
+    }
+</style>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ucenik</th>
+            <th>Prosjek ocjena</th>
+            <th>Pristupio ispitu</th>
+            <th>Rezultati maturskog ispita</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.DetaljiPrikaz)
+        {
+            <tr>
+                <td>@x.ucenikImePrezime</td>
+                <td>@x.prosjekOcjena</td>
+                <td>
+                    <input id="mijenjanjePrisutnosti-@x.detaljiID" class="@x.RezultatPristupa" type="submit" value="@x.RezultatPristupa"/>
+                    <script>
+                            $("#mijenjanjePrisutnosti-@x.detaljiID").click(function (event) {
+                                $.get("/MaturskiIspit/PromjenaPrisutnosti?detaljiID=@x.detaljiID",
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+                    </script>
+                </td>
+                <td>
+                    @if (x.pristupioIspitu)
+                    {
+                        @*@x.rezultatMaturskog*@
+                        <input value="@x.rezultatMaturskog" data-zaprimi="@x.detaljiID" class="ajaxResult"/>
+                    }
+                    else
+                    {
+                        @:x
+                    }
+                </td>
+                <td>
+                    @if (x.pristupioIspitu)
+                    {
+                        <input id="urediPoene-@x.detaljiID" href="/MaturskiIspit/UrediBodove?detaljiID=@x.detaljiID" value="Uredi" type="submit">
+                        <script>
+                            $("#urediPoene-@x.detaljiID").click(function (event) {
+                                $.get("/MaturskiIspit/UrediBodove?detaljiID=@x.detaljiID",
+                                    function (result, status) {
+                                        $("#nekiID").html(result);
+                                    }
+                                );
+                            });
+                        </script>
+                    }
+                    else
+                    {
+                        //prazno
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function (event) {
+        $(".ajaxResult").change(function () {
+            var id = $(this).attr("data-zaprimi");
+            var bodovi = $(this).val();
+            var urlPotreban = "/MaturskiIspit/SnimanjeBodova?detaljiID=" + id + "&bodovi=" + bodovi;
+
+            $.ajax({
+                url: urlPotreban, 
+                type: "POST",
+                success: function (result) {
+                    $("#nekiID").html(result);
+                }
+            });
+        });
+    });
+</script>
+
+
+

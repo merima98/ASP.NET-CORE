@@ -1,0 +1,35 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "MijenjenjeOpravdaneOdsutnosti";
+}
+@model UrediOpravdanuOdsutnostVM
+    <form id="formaSnimanjaOdsutnosti" class="form-group" asp-action="SnimanjeOdsutnosti">
+        <input asp-for="detaljID" hidden />
+        <div class="form-control">
+            <label>Ucenik: </label>
+            <input asp-for="ucenikIme" readonly />
+        </div>
+        <div class="form-control">
+            <label>Napomena: </label>
+            <input asp-for="napomena" />
+        </div>
+        <div class="form-control">
+            <label>Opravdano odsutan: </label>
+            <input asp-for="opravdano" type="checkbox" />
+        </div>
+    </form>
+<input id="bottonSnimanjaOdsutnosti" value="Snimi" type="submit" />
+<script>
+    $("#bottonSnimanjaOdsutnosti").click(function (event) {
+        var forma = $("#formaSnimanjaOdsutnosti");
+
+        $.ajax({
+            url: '/OdrzanaNastava/SnimanjeOdsutnosti',
+            data: forma.serialize(),
+            type: "POST",
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>

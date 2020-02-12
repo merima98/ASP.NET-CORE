@@ -1,0 +1,30 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "UredjivaenjUcesnikaBodovi";
+}
+@model UredjivanjeUcesnikaDetaljiVM
+<form id="uredjivanjeUcesnikID_Forma" class="form-group" asp-action="UredjivaenjUcesnikaBodovi">
+    <input asp-for="detaljiID" hidden />
+    <div class="form-control">
+        <label>Ucenik : </label>
+        <select asp-for="ucenikID" asp-items="Model.ucenik"></select>
+    </div>
+    <div class="form-control">
+        <label>Bodovi:  </label>
+        <input asp-for="bodovi" />
+    </div>
+</form>
+<input id="uredjivanjeUcesnikID_BTN" value="Snimi" type="submit" />
+<script>
+    $("#uredjivanjeUcesnikID_BTN").click(function (event) {
+        var forma = $("#uredjivanjeUcesnikID_Forma");
+        $.ajax({
+            data: forma.serialize(),
+            type: "POST",
+            url: '/Takmicenje/UredjivaenjUcesnikaBodovi',
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>

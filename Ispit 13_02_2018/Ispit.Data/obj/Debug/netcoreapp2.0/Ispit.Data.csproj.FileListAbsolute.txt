@@ -1,0 +1,8 @@
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Data\bin\Debug\netcoreapp2.0\Ispit.Data.deps.json
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Data\bin\Debug\netcoreapp2.0\Ispit.Data.dll
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Data\bin\Debug\netcoreapp2.0\Ispit.Data.pdb
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Data\obj\Debug\netcoreapp2.0\Ispit.Data.csprojAssemblyReference.cache
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Data\obj\Debug\netcoreapp2.0\Ispit.Data.AssemblyInfoInputs.cache
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Data\obj\Debug\netcoreapp2.0\Ispit.Data.AssemblyInfo.cs
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Data\obj\Debug\netcoreapp2.0\Ispit.Data.dll
+C:\Users\HOME\Desktop\RS_februar\13_02_2018_PocetniProjekt\Ispit.Data\obj\Debug\netcoreapp2.0\Ispit.Data.pdb

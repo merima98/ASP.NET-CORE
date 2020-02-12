@@ -1,0 +1,142 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "PrikazDetaljaTakmicenjeDetalji";
+}
+@model PrikazDetaljaDetaljVM
+<style>
+    .DA {
+        color: white;
+        background-color: green;
+    }
+
+    .NE {
+        color: white;
+        background-color: red;
+    }
+</style>
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Odjeljenje</th>
+            <th>Broj u dnevniku</th>
+            <th>Pristupio</th>
+            <th>Rezultati (max 100)</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    @foreach (var x in Model.podaciRezultat)
+    {
+        <tr>
+            <td>@x.odjeljenjeNAziv</td>
+            <td>@x.brojDnevnik</td>
+            <td>
+                @if (x.isZakljucano == false)
+                {
+                    <input class="@x.rezultatPristupa" value="@x.rezultatPristupa" id="mijenjeanjeStatusa-@x.takmicenjeDetaljID" type="submit" />
+
+                }
+                else
+                {
+                    <span class="@x.rezultatPristupa"> @x.rezultatPristupa</span>
+                }
+
+                <script>
+                        $("#mijenjeanjeStatusa-@x.takmicenjeDetaljID").click(function (event) {
+                            $.get("/Takmicenje/MijenjanjeStatusa?detaljiID=@x.takmicenjeDetaljID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                </script>
+            </td>
+            <td>
+                @if (x.isZakljucano == false)
+                {
+                    @if (x.pristupio)
+                    {
+                        <input value=" @x.bodovi" data-zaprimi="@x.takmicenjeDetaljID" class="ajaxResult" />
+                    }
+                    else
+                    {
+                        @:x
+                    }
+                }
+                else
+                {
+                    @if (x.pristupio)
+                    {
+            <span>@x.bodovi</span>
+                    }
+                    else
+                    {
+                       <span>x</span>
+                    }
+                }
+            </td>
+            <td>
+                @if (x.isZakljucano == false)
+                {
+                    @if (x.pristupio)
+                    {
+                        <input value="Uredi" type="submit" id="urediUcesnika-@x.takmicenjeDetaljID" />
+
+                    }
+                    else
+                    {
+                        //
+                    }
+                }
+                else
+                {
+                    @if (x.pristupio)
+                    {
+                       <span>Uredi</span>
+
+                    }
+                    else
+                    {
+                       <span></span>
+                    }
+                }
+                <script>
+                        $("#urediUcesnika-@x.takmicenjeDetaljID").click(function (event) {
+                            $.get("/Takmicenje/UredjivaenjUcesnikaBodovi?detalji=@x.takmicenjeDetaljID",
+                                function (result, status) {
+                                    $("#nekiID").html(result);
+                                }
+                            );
+                        });
+                </script>
+            </td>
+
+        </tr>
+    }
+</table>
+<input value="Dodaj ucesnika" type="submit" id="dodavanjeUcesnika-@Model.takmicenjeID" />
+<script>
+    $("#dodavanjeUcesnika-@Model.takmicenjeID").click(function (event) {
+        $.get("/Takmicenje/DodavanjeUcesnikaNaTakmicenje?takmicenjeID=@Model.takmicenjeID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+
+    $(document).ready(function (event) {
+        $(".ajaxResult").change(function () {
+
+            var id = $(this).attr("data-zaprimi");
+            var bodovi = $(this).val();
+            var urlP = "/Takmicenje/SnimanjeBodova?detaljiiD=" + id + "&bodoovi=" + bodovi;
+            $.ajax({
+                url: urlP,
+                type: "POST",
+                success: function (result) {
+                    $("#nekiID").html(result);
+                }
+            });
+        });
+    });
+</script>

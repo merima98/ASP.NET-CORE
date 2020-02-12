@@ -1,0 +1,40 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "UredjivanjeModalitet";
+}
+@model UredjivanjeModaliteta
+<form id="formaModalitet" class="form-group" action="/Uputnica/SnimanjeModaliteta">
+    <input value="@Model.labID" name="labID" hidden />
+
+    <div class="form-control">
+        <label>Naziv: </label>
+        <input value="@Model.nazivOpis" readonly />
+    </div>
+    <div class="form-control">
+        <label>Vrijednost: </label>
+       <select name="nazivID">
+           <option value="1">Bistar</option>
+           <option value="2">Zamucen</option>
+           <option value="3">Zut</option>
+           <option value="4">Nema</option>
+           <option value="5">Nesto</option>
+           <option value="6">Mnogo</option>
+       </select>
+    </div>
+</form>
+<input id="btnModalitet" name="Snimi" type="submit" />
+<script>
+    $("#btnModalitet").click(function (event) {
+
+        var forma = $("#formaModalitet");
+
+        $.ajax({
+            type: "POST",
+            data: forma.serialize(),
+            url: '/Uputnica/SnimanjeModaliteta',
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>

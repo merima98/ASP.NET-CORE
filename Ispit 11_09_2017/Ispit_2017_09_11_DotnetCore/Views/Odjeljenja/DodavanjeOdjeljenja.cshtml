@@ -1,0 +1,33 @@
+﻿@using Ispit_2017_09_11_DotnetCore.ViewModels
+@{
+    ViewData["Title"] = "DodavanjeOdjeljenja";
+}
+@model OdjeljenjeADD_VM
+    <form class="form-group" asp-action="DodavanjeOdjeljenja">
+        <div class="form-control">
+            <label>Novo odjeljenje</label>
+        </div>
+        <div class="form-control">
+            <label>Skolska godina</label>
+            <input asp-for="SkolskaGodina" />
+        </div>
+        <div class="form-control">
+            <label>Razred</label>
+            <input asp-for="Razred" />
+        </div>
+        <div class="form-control">
+            <label>Oznaka</label>
+            <input asp-for="OznakaOdjeljenja" />
+        </div>
+        <div class="form-control">
+            <label>Razrednik: </label>
+            <select asp-for="NastavnikID" asp-items="Model.Nastavnik"></select>
+        </div>
+        <div class="form-control">
+            <label>Preuzmi ucenike iz nizeg odjeljenja: </label>
+            <select asp-for="NizeOdjeljenjeID" asp-items="Model.NizeOdjeljenje"></select>
+        </div>
+        <div class="form-control">
+           <input value="Snimi" type="submit"/>
+        </div>
+    </form>

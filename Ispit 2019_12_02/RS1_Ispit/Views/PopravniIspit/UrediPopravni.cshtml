@@ -1,0 +1,38 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "UrediPopravni";
+}
+@model PopravniIspit_VM_Uredi
+<form class="form-group" asp-action="DodavanjePopravnogIspita">
+    <input asp-for="popravniID" hidden/>
+    <div class="form-control">
+        <label>Predmet: </label>
+        <input asp-for="predmetNaziv" readonly />
+    </div>
+    <div class="form-control">
+        <label>Datum ispita: </label>
+        <input asp-for="datumIspita" readonly />
+    </div>
+    <div class="form-control">
+        <label>Skola: </label>
+        <input asp-for="skolaNaziv" readonly />
+    </div>
+    <div class="form-control">
+        <label>Skolska godina: </label>
+        <input asp-for="skolskaGOdina" readonly />
+    </div>
+    <div class="form-control">
+        <label>Odjeljenje: </label>
+        <input asp-for="odjeljenjNaziv" readonly />
+    </div>
+</form>
+<div id="nekiID"></div>
+<script>
+    $(document).ready(function (event) {
+        $.get("/PopravniIspit/DetaljiPopravniPrikaz?popravniIspitID=@Model.popravniID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+</script>

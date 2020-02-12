@@ -1,0 +1,35 @@
+﻿@using Ispit.Web.ViewModels
+@{
+    ViewData["Title"] = "DetaljiDogadjaja";
+}
+@model DetaljiDogadjajaVM
+    <form class="form-group">
+        <input asp-for="oznaceniDogadjajID" hidden/>
+
+        <div class="form-control">
+            <label>Datum dogadjaja </label>
+            <input asp-for="datumDogadjaja" readonly />
+        </div>
+        <div class="form-control">
+            <label>Datum dodavanja </label>
+            <input asp-for="datumDodavanja" readonly />
+        </div>
+        <div class="form-control">
+            <label>Opis dogadjaja </label>
+            <input asp-for="opisDogadjaja" readonly />
+        </div>
+        <div class="form-control">
+            <label>Nastavnik </label>
+            <input asp-for="nastavnikImePrezime" readonly />
+        </div>
+    </form>
+<div id="nekiID"></div>
+<script>
+    $(document).ready(function (event) {
+        $.get("/OznaceniDogadaji/StanjeObavezePrikaz?oznaceniDOgadjajID=@Model.oznaceniDogadjajID",
+            function (result, status) {
+                $("#nekiID").html(result);
+            }
+        );
+    });
+</script>

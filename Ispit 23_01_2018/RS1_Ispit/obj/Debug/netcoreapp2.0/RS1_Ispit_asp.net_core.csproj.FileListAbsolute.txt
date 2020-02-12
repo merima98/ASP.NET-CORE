@@ -1,0 +1,14 @@
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\appsettings.Development.json
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\appsettings.json
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\bundleconfig.json
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\Properties\launchSettings.json
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.deps.json
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.runtimeconfig.json
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.runtimeconfig.dev.json
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.dll
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\bin\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.pdb
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\obj\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.csprojAssemblyReference.cache
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\obj\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.AssemblyInfoInputs.cache
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\obj\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.AssemblyInfo.cs
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\obj\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.dll
+C:\Users\HOME\Desktop\RS_februar\23_01_2018_PocetniProjekt\RS1_Ispit\obj\Debug\netcoreapp2.0\RS1_Ispit_asp.net_core.pdb

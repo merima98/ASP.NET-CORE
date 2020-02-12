@@ -1,0 +1,37 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "MijenjanjeBodova";
+}
+@model UredjivanjeUcenikBOdovi
+<form  id="formaSnimanjaBodova" class="form-group" action="/PopravniIspit/SnimanjeBodova">
+    <input value="@Model.detaljiID" name="detaljiID" hidden/>
+    <div class="form-control">
+
+        <label>Ucenik: </label>
+        <input value="@Model.ucenikIme"  readonly/>
+
+    </div>
+
+    <div class="form-control">
+
+        <label>Bodovi: </label>
+        <input value="@Model.bodovi" name="bodovi"/>
+    </div>
+</form>
+        <input  id="btnSnimanjaBodova" value="Snimi" type="submit" />
+<script>
+    $("#btnSnimanjaBodova").click(function (event) {
+
+        var forma = $("#formaSnimanjaBodova");
+
+        $.ajax({
+
+            data: forma.serialize(),
+            type: "POST",
+            url: '/PopravniIspit/SnimanjeBodova',
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>

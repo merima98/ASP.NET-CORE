@@ -1,0 +1,27 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "DodavanjeUputnice";
+}
+@model DodavanjeUputniceVM
+    <form class="form-group" asp-action="DodavanjeUputnice">
+        <div class="form-control">
+            <label>Ljekar uputio: </label>
+            <select asp-for="uputioLjekarID" asp-items="Model.uputioLjekar"></select>
+        </div>
+        <div class="form-control">
+            <label>Datum uputioce: </label>
+            <input asp-for="datumUputnice" />
+            <span asp-validation-for="datumUputnice" style="color:red;"></span>
+        </div>
+        <div class="form-control">
+            <label>Pacijent: </label>
+            <select asp-for="pacijentID" asp-items="Model.pacijent"></select>
+        </div>
+        <div class="form-control">
+            <label>Vrsta pretrage: </label>
+            <select asp-for="vrsstaPretrageID" asp-items="Model.vrsstaPretrage"></select>
+        </div>
+        <div class="form-control">
+            <input name="Snimi" type="submit"/>
+        </div>
+    </form>

@@ -1,0 +1,33 @@
+﻿@using RS1_Ispit_asp.net_core.ViewModels
+@{
+    ViewData["Title"] = "UredjivanjeNumericko";
+}
+@model UredivanjeNumerockoVM
+<form id="formaNumericko" class="form-group" action="/Uputnica/SnimanjeNumericko">
+    <input value="@Model.labID" name="labID" hidden />
+
+    <div class="form-control">
+        <label>Naziv: </label>
+        <input value="@Model.naziv" readonly />
+    </div>
+    <div class="form-control">
+        <label>Izmjerena vrijednost: </label>
+        <input value="@Model.izmjerenaVrijednosti"  name="izmjerenaVrijednosti"/>
+    </div>
+</form>
+<input id="btnNumericko" name="Snimi" type="submit" />
+<script>
+    $("#btnNumericko").click(function (event) {
+
+        var forma = $("#formaNumericko");
+
+        $.ajax({
+            type: "POST",
+            data: forma.serialize(),
+            url: '/Uputnica/SnimanjeNumericko',
+            success: function (result) {
+                $("#nekiID").html(result);
+            }
+        });
+    });
+</script>
